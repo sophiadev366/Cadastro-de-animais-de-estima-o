@@ -1,54 +1,78 @@
-from animal import Animal, Cachorro, Gato
+from animal import Gerenciador
+
+def mostrar_titulo():
+    """
+    Mostra o título do sistema.
+    """
+    print("=" * 40)
+    print("   🐶 SISTEMA DE PET SHOP 🐱")
+    print("=" * 40)
+    print()
 
 def menu():
-    while True:
-        print("""
-        #========🐾 Menu Principal 🐕‍🦺========#
-        1️⃣ - Adicionar animal 
-        2️⃣ - Remover animal
-        3️⃣ - Buscar animal
-        4️⃣ - Exibir animais
-        9️⃣ - Sair
-        #====================================#
-        """)
-        
-        option = input("Escolha uma opção no menu acima: ")
+    """
+    Menu principal do sistema, com opções pré-condicionadas por perfil de usuário.
+    """
+    sistema = Gerenciador()
+    perfil = ""
 
-        if option == "1":
-            print("\n===📋 Adicionar Pet 📋===")
-            nome = input("Nome: ")
-            idade = input("Idade: ")
-            dono = input("Dono: ")
+    # Seleção de perfil
+    while perfil not in ["admin", "normal"]:
+        perfil = input("Digite seu perfil (admin/normal): ").lower().strip()
+        if perfil not in ["admin", "normal"]:
+            print("❌ Perfil inválido! Digite 'admin' ou 'normal'.")
 
-            resultado = Animal.adicionar_animal(nome, idade, dono)
-            print("\nAnimal cadastrado com sucesso!" if resultado else "Erro ao cadastrar!")
+    continuar = True
+    while continuar:
+        mostrar_titulo()
+        print("1️⃣  Cadastrar/Adicionar Animal" if perfil=="admin" else "")
+        print("2️⃣  Remover Animal" if perfil=="admin" else "")
+        print("3️⃣  Buscar Animal")
+        print("4️⃣  Listar Animais")
+        print("0️⃣  Sair")
 
-        elif option == "2":
-            print("\n===❌ Remover Pet ❌===")
-            nome = input("Nome do pet para remover: ")
+        opcao = input("\n👉 Escolha uma opção: ").strip()
 
-            resultado = Animal.remover_animal(nome)
-            print("Animal removido com sucesso!" if resultado else "Pet não encontrado!")
-
-        elif option == "3":
-            print("\n===🔎 Buscar Pet 🔍===")
-            nome = input("Nome do pet para buscar: ")
-            resultado = Animal.buscar_animal(nome)
-            if not resultado:
-                print("Pet não encontrado!")
+        # Opções para admin
+        if perfil == "admin":
+            if opcao == "1":
+                sistema.cadastrar_animal()
+            elif opcao == "2":
+                sistema.remover_animal()
+            elif opcao == "3":
+                sistema.buscar_animal()
+            elif opcao == "4":
+                sistema.listar_animais()
+            elif opcao == "0":
+                print("Saindo do sistema... 👋")
+                break
             else:
-                print(f"\nNome: {resultado[0]} | Idade: {resultado[1]} | Dono: {resultado[2]}")
-
-        elif option == "4":
-            print("\n===📑 Lista de Pets 📑===")
-            Animal.exibir_animais()
-
-        elif option == "9":
-            print("Saindo do sistema... Até logo! 🐾")
-            break
-
+                print("❌ Opção inválida!")
+        # Opções para usuário normal
         else:
-            print("⚠ Opção inválida! Tente novamente.")
+            if opcao == "3":
+                sistema.buscar_animal()
+            elif opcao == "4":
+                sistema.listar_animais()
+            elif opcao == "0":
+                print("Saindo do sistema... 👋")
+                break
+            else:
+                print("❌ Opção inválida!")
+
+        # Pergunta para continuar
+        if opcao in ["1","2","3","4"]:
+            while True:
+                resposta = input("Deseja continuar no sistema? (s/n): ").lower().strip()
+                if resposta == "s":
+                    break
+                elif resposta == "n":
+                    print("Saindo do sistema...👋")
+                    continuar = False
+                    break
+                else:
+                    print("❌ Opção inválida! Digite 's' ou 'n'.")
 
 if __name__ == "__main__":
     menu()
+    
