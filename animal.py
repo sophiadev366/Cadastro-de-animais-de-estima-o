@@ -30,3 +30,41 @@ class Animal:
         Retorna uma representação legível do animal.
         """
         return f"{self.especie} - Nome: {self.nome}, Raça: {self.raca}, Idade: {self.idade}, Dono: {self.dono}"
+    
+class Cachorro(Animal):
+    """
+    Classe Cachorro, herda de Animal.
+    """
+    def __init__(self, nome, raca, idade, dono):
+        super().__init__(nome, "Cachorro", raca, idade, dono)
+
+    def to_dict(self):
+        """
+        Sobrescreve o método para incluir tipo Cachorro.
+        """
+        return {
+            "tipo": "Cachorro",
+            "nome": self.nome,
+            "raca": self.raca,
+            "idade": self.idade,
+            "dono": self.dono
+        }
+
+class Gato(Animal):
+    """
+    Classe Gato, herda de Animal.
+    """
+    def __init__(self, nome, raca, idade, dono):
+        super().__init__(nome, "Gato", raca, idade, dono)
+
+    def to_dict(self):
+        """
+        Sobrescreve o método para incluir tipo Gato.
+        """
+        return {
+            "tipo": "Gato",
+            "nome": self.nome,
+            "raca": self.raca,
+            "idade": self.idade,
+            "dono": self.dono
+        }
