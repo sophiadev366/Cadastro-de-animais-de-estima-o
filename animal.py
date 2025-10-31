@@ -30,7 +30,7 @@ class Animal:
         Retorna uma representação legível do animal.
         """
         return f"{self.especie} - Nome: {self.nome}, Raça: {self.raca}, Idade: {self.idade}, Dono: {self.dono}"
-    
+
 class Cachorro(Animal):
     """
     Classe Cachorro, herda de Animal.
@@ -68,14 +68,13 @@ class Gato(Animal):
             "idade": self.idade,
             "dono": self.dono
         }
-    
-# ----- GERENCIADOR -----
 
+# ----- GERENCIADOR -----
 class Gerenciador:
     """
     Classe responsável por gerenciar os animais e persistir dados.
     """
-    def _init_(self, arquivo="animais.json"):
+    def __init__(self, arquivo="animais.json"):
         self.arquivo = arquivo
         self.animais = self.carregar()
 
