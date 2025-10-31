@@ -70,6 +70,7 @@ class Gato(Animal):
         }
     
 # ----- GERENCIADOR -----
+
 class Gerenciador:
     """
     Classe responsável por gerenciar os animais e persistir dados.
@@ -153,3 +154,37 @@ class Gerenciador:
             print("❌ Animal não encontrado.")
 
     def buscar_animal(self):
+        """
+        Busca um animal pelo nome.
+        """
+        if not self.animais:
+            print("❌ Nenhum animal cadastrado. Cadastre pelo menos um animal antes de buscar.")
+            return
+
+        nome = input("Digite o nome do animal: ").strip()
+        animal = self.buscar_animal_por_nome(nome)
+        if animal:
+            print(f"\n🔍 Animal encontrado:\n{animal}")
+        else:
+            print("❌ Animal não encontrado.")
+
+    def listar_animais(self):
+        """
+        Lista todos os animais de forma legível.
+        """
+        if not self.animais:
+            print("❌ Nenhum animal cadastrado. Cadastre pelo menos um animal antes de tentar listar. ")
+        else:
+            print("\n📋 Animais cadastrados:")
+            for i, a in enumerate(self.animais, 1):
+                print(f"{i}. {a}")
+
+    def buscar_animal_por_nome(self, nome):
+        """
+        Busca um animal pelo nome exatamente como foi cadastrado.
+        """
+        for a in self.animais:
+            if a.nome == nome:  # comparação exata, respeita maiúsculas/minúsculas
+                return a
+        return None
+    
