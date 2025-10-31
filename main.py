@@ -47,7 +47,7 @@ def menu():
                 print("Saindo do sistema... 👋")
                 break
             else:
-                print("❌ Opção inválida!")
+                print("\033[31m❌ Opção inválida!\033[0m")
         # Opções para usuário normal
         else:
             if opcao == "3":
@@ -58,7 +58,7 @@ def menu():
                 print("Saindo do sistema... 👋")
                 break
             else:
-                print("❌ Opção inválida!")
+                print("\033[31m❌ Opção inválida!\033[0m")
 
         # Pergunta para continuar
         if opcao in ["1","2","3","4"]:
@@ -71,7 +71,7 @@ def menu():
                     continuar = False
                     break
                 else:
-                    print("❌ Opção inválida! Digite 's' ou 'n'.")
+                    print("❌\033[31m Opção inválida! Digite 's' ou 'n'.\033[0m")
 
 if __name__ == "__main__":
     menu()
